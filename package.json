@@ -1,6 +1,6 @@
 {
-  "name": "@jira-killer/error-codes",
-  "version": "1.0.8",
+  "name": "@buildery/error-codes",
+  "version": "1.1.0",
   "description": "This package contains error codes.",
   "private": false,
   "publishConfig": {
@@ -17,5 +17,8 @@
   },
   "main": "dist/main.js",
   "author": "Anton Seminski, Vladimir Karpov",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
 }

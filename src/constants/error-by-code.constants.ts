@@ -2,17 +2,12 @@ import {HttpStatus} from "./http-status.constants";
 import {CODES} from "./codes.contants";
 
 export const ERROR_BY_CODE = new Map([
-    [CODES.USER.DUPLICATE, {
-      code: CODES.USER.DUPLICATE,
+    //USER
+    [CODES.USER.USERNAME_TAKEN, {
+      code: CODES.USER.USERNAME_TAKEN,
       status: HttpStatus.BAD_REQUEST,
-      title: 'Email is taken',
-      message: 'Email is taken. Use another email or restore password'
-    }],
-    [CODES.USER.NOT_FOUND, {
-      code: CODES.USER.NOT_FOUND,
-      status: HttpStatus.BAD_REQUEST,
-      title: 'User not found',
-      message: 'User with this email not found. ъуъ!'
+      title: 'Username is takem',
+      message: 'Username is taken. Use another username, please.'
     }],
     [CODES.USER.INACTIVE, {
       code: CODES.USER.INACTIVE,
@@ -26,12 +21,6 @@ export const ERROR_BY_CODE = new Map([
       title: 'Error',
       message: 'You can edit you user only'
     }],
-    [CODES.USER.WRONG_PASSWORD, {
-      code: CODES.USER.WRONG_PASSWORD,
-      status: HttpStatus.BAD_REQUEST,
-      title: 'Wrong credential',
-      message: 'Wrong email or password'
-    }],
     [CODES.USER.NOT_LOGGED_IN, {
       code: CODES.USER.NOT_LOGGED_IN,
       status: HttpStatus.BAD_REQUEST,
@@ -39,24 +28,42 @@ export const ERROR_BY_CODE = new Map([
       message: 'User not Logged in'
     }],
 
-
+    //AUTH
+    [CODES.AUTH.WRONG_CREDENTIALS, {
+        code: CODES.AUTH.WRONG_CREDENTIALS,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Wrong credentials',
+        message: 'There are no users with the credentials provided.'
+    }],
+    [CODES.AUTH.RESTRICTED_IP, {
+        code: CODES.AUTH.RESTRICTED_IP,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Restricted Ip',
+        message: 'You have logged in from restricted IP.'
+    }],
+    [CODES.AUTH.OFF_HOURS, {
+        code: CODES.AUTH.OFF_HOURS,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Off hours',
+        message: 'You have logged in off hours.'
+    }],
     [CODES.AUTH.INVALID_SPECIAL_CODE, {
       code: CODES.AUTH.INVALID_SPECIAL_CODE,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'No special code found'
+      message: 'No special code found.'
     }],
     [CODES.AUTH.NO_AUTH_HEADER, {
       code: CODES.AUTH.NO_AUTH_HEADER,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'No Authorization Data (Header)'
+      message: 'No Authorization Data (Header).'
     }],
     [CODES.AUTH.WRONG_AUTH_TYPE, {
       code: CODES.AUTH.WRONG_AUTH_TYPE,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'Wrong auth type'
+      message: 'Wrong auth type.'
     }],
     [CODES.AUTH.NO_TOKEN, {
       code: CODES.AUTH.NO_TOKEN,
@@ -71,27 +78,27 @@ export const ERROR_BY_CODE = new Map([
       message: 'No token payload found!'
     }],
 
-
+    //SESSION
     [CODES.SESSION.EMPTY, {
       code: CODES.SESSION.EMPTY,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'No session found'
+      message: 'No session found.'
     }],
     [CODES.SESSION.EXPIRED, {
       code: CODES.SESSION.EXPIRED,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'Session has expired'
+      message: 'Session has expired.'
     }],
     [CODES.SESSION.WRONG_DEVICE, {
       code: CODES.SESSION.EMPTY,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'False dragon'
+      message: 'False dragon.'
     }],
 
-
+    //COMMON
     [CODES.COMMON.UNKNOWN, {
       code: CODES.COMMON.UNKNOWN,
       status: HttpStatus.BAD_REQUEST,
@@ -105,16 +112,16 @@ export const ERROR_BY_CODE = new Map([
       code: CODES.COMMON.EMPTY_EMAIL,
       status: HttpStatus.INTERNAL_SERVER_ERROR,
       title: 'Error',
-      message: 'Empty email'
+      message: 'Empty email.'
     }],
     [CODES.COMMON.EMPTY_PARAM, {
       code: CODES.COMMON.EMPTY_PARAM,
       status: HttpStatus.INTERNAL_SERVER_ERROR,
       title: 'Error',
-      message: `Empty param`
+      message: `Empty param.`
     }],
 
-
+    //CODE
     [CODES.CODE.INVALID, {
       code: CODES.CODE.INVALID,
       status: HttpStatus.UNAUTHORIZED,
@@ -125,13 +132,13 @@ export const ERROR_BY_CODE = new Map([
       code: CODES.CODE.UNKNOWN,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Unknown code',
-      message: `Grogu doesn't know this cookie! Grogu won't eat it! Try again`
+      message: `Grogu doesn't know this cookie! Grogu won't eat it! Try again.`
     }],
     [CODES.CODE.EXPIRED, {
       code: CODES.CODE.EXPIRED,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Expired code',
-      message: `Grogu knows this cookie is stale! Grogu won't eat it! Try again`
+      message: `Grogu knows this cookie is stale! Grogu won't eat it! Try again.`
     }],
     [CODES.CODE.WRONG_RELATED_TO, {
       code: CODES.CODE.WRONG_RELATED_TO,
@@ -140,7 +147,7 @@ export const ERROR_BY_CODE = new Map([
       message: `Grogu won't eat stolen cookie!`
     }],
 
-
+    //DATABASE
     [CODES.DATABASE.DUPLICATE, {
       code: CODES.DATABASE.DUPLICATE,
       status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -148,7 +155,7 @@ export const ERROR_BY_CODE = new Map([
       message: `Duplicate record!`
     }],
 
-
+    //VALIDATE
     [CODES.VALIDATION, {
       code: CODES.VALIDATION,
       status: HttpStatus.BAD_REQUEST,
@@ -156,7 +163,7 @@ export const ERROR_BY_CODE = new Map([
       message: `Validation error! Please refer body for details!`
     }],
 
-
+    //HTTP
     [CODES.HTTP["400"], {
       code: CODES.HTTP["400"],
       status: HttpStatus.BAD_REQUEST,
@@ -182,7 +189,7 @@ export const ERROR_BY_CODE = new Map([
       message: 'Not found!'
     }],
 
-
+    //LICENSE
     [CODES.LICENSE.NOT_FOUND, {
       code: CODES.LICENSE.NOT_FOUND,
       status: HttpStatus.BAD_REQUEST,
@@ -190,7 +197,7 @@ export const ERROR_BY_CODE = new Map([
       message: `No such license found!`
     }],
 
-
+    //WORKSPACE
     [CODES.WORKSPACE.NO_ACCESS, {
       code: CODES.WORKSPACE.NO_ACCESS,
       status: HttpStatus.UNAUTHORIZED,
@@ -204,7 +211,7 @@ export const ERROR_BY_CODE = new Map([
       message: `No such Workspace found!`
     }],
 
-
+    //FEATURE
     [CODES.FEATURE.NOT_AVAILABLE, {
       code: CODES.FEATURE.NOT_AVAILABLE,
       status: HttpStatus.FORBIDDEN,
@@ -212,12 +219,12 @@ export const ERROR_BY_CODE = new Map([
       message: `This Feature is not available for you license!`
     }],
 
-
+    //PERMISSION
     [CODES.PERMISSION.NOT_FOUND, {
       code: CODES.PERMISSION.NOT_FOUND,
       status: HttpStatus.FORBIDDEN,
       title: 'Error',
-      message: `You don't have necessery permissions to enter!`
+      message: `You don't have necessary permissions to enter!`
     }],
     [CODES.PERMISSION.NONE_AVAILABLE, {
       code: CODES.PERMISSION.NONE_AVAILABLE,
