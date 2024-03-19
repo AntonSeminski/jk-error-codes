@@ -2,30 +2,50 @@ import {HttpStatus} from "./http-status.constants";
 import {CODES} from "./codes.contants";
 
 export const ERROR_BY_CODE = new Map([
+    //MONGO
+    [CODES.MONGO.INVALID_BSON_ID, {
+        code: CODES.MONGO.INVALID_BSON_ID,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: 'Invalid Object Id'
+    }],
+
     //USER
     [CODES.USER.USERNAME_TAKEN, {
       code: CODES.USER.USERNAME_TAKEN,
       status: HttpStatus.BAD_REQUEST,
-      title: 'Username is takem',
+      title: 'Username is taken',
       message: 'Username is taken. Use another username, please.'
     }],
     [CODES.USER.INACTIVE, {
       code: CODES.USER.INACTIVE,
       status: HttpStatus.INTERNAL_SERVER_ERROR,
-      title: 'User is inactive',
-      message: 'We send code to activate to email'
+      title: 'User is InActive',
+      message: 'Your user was deactivated, please contact your administrator for details.'
+    }],
+    [CODES.USER.NOT_FOUND, {
+      code: CODES.USER.NOT_FOUND,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'User not found.',
+      message: 'User not found.'
     }],
     [CODES.USER.EDIT_ONLY_YOURSELF, {
       code: CODES.USER.EDIT_ONLY_YOURSELF,
       status: HttpStatus.FORBIDDEN,
       title: 'Error',
-      message: 'You can edit you user only'
+      message: 'You can edit your user only.'
     }],
     [CODES.USER.NOT_LOGGED_IN, {
       code: CODES.USER.NOT_LOGGED_IN,
       status: HttpStatus.BAD_REQUEST,
       title: 'Error',
-      message: 'User not Logged in'
+      message: 'User not Logged in.'
+    }],
+    [CODES.USER.ALREADY_VERIFIED, {
+      code: CODES.USER.ALREADY_VERIFIED,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Error',
+      message: 'User already verified.'
     }],
 
     //AUTH
@@ -57,13 +77,13 @@ export const ERROR_BY_CODE = new Map([
       code: CODES.AUTH.NO_AUTH_HEADER,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'No Authorization Data (Header).'
+      message: 'No Authorization Data provided (Header).'
     }],
     [CODES.AUTH.WRONG_AUTH_TYPE, {
       code: CODES.AUTH.WRONG_AUTH_TYPE,
       status: HttpStatus.UNAUTHORIZED,
       title: 'Error',
-      message: 'Wrong auth type.'
+      message: 'Wrong authorization type. Bearer is required.'
     }],
     [CODES.AUTH.NO_TOKEN, {
       code: CODES.AUTH.NO_TOKEN,
@@ -150,7 +170,7 @@ export const ERROR_BY_CODE = new Map([
     //DATABASE
     [CODES.DATABASE.DUPLICATE, {
       code: CODES.DATABASE.DUPLICATE,
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      status: HttpStatus.BAD_REQUEST,
       title: 'Error',
       message: `Duplicate record!`
     }],
@@ -188,6 +208,12 @@ export const ERROR_BY_CODE = new Map([
       title: 'Error',
       message: 'Not found!'
     }],
+    [CODES.HTTP.BAD_INPUT, {
+      code: CODES.HTTP.BAD_INPUT,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Error',
+      message: 'Bad input provided. Check the input for issues.'
+    }],
 
     //LICENSE
     [CODES.LICENSE.NOT_FOUND, {
@@ -206,6 +232,20 @@ export const ERROR_BY_CODE = new Map([
     }],
     [CODES.WORKSPACE.NOT_FOUND, {
       code: CODES.WORKSPACE.NOT_FOUND,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Error',
+      message: `No such Workspace found!`
+    }],
+
+    //WORKSPACE INFO
+    [CODES.WORKSPACE_INFO.DOMAIN_TAKEN, {
+      code: CODES.WORKSPACE_INFO.DOMAIN_TAKEN,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Error',
+      message: `Domain is already occupied. Please choose another one.`
+    }],
+    [CODES.WORKSPACE_INFO.NOT_FOUND, {
+      code: CODES.WORKSPACE_INFO.NOT_FOUND,
       status: HttpStatus.BAD_REQUEST,
       title: 'Error',
       message: `No such Workspace found!`
@@ -232,5 +272,127 @@ export const ERROR_BY_CODE = new Map([
       title: 'Error',
       message: `You don't have any permissions!`
     }],
+    [CODES.PERMISSION.RELATED_DEFINITION_NOT_FOUND, {
+      code: CODES.PERMISSION.RELATED_DEFINITION_NOT_FOUND,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Validation',
+      message: `Related Definition not found.`
+    }],
+    [CODES.PERMISSION.RELATED_GROUP_NOT_FOUND, {
+      code: CODES.PERMISSION.RELATED_GROUP_NOT_FOUND,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Validation',
+      message: 'Related Category not found.'
+    }],
+
+    [CODES.PERMISSION_SET.NOT_FOUND, {
+      code: CODES.PERMISSION_SET.NOT_FOUND,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Validation',
+      message: `Permission Set not found.`
+    }],
+    [CODES.PERMISSION_SET.ASSIGNEE_NOT_FOUND, {
+      code: CODES.PERMISSION_SET.ASSIGNEE_NOT_FOUND,
+      status: HttpStatus.BAD_REQUEST,
+      title: 'Validation',
+      message: `Assignee not found.`
+    }],
+
+    [CODES.PERMISSION_OPTIONS.NOT_FOUND, {
+      code: CODES.PERMISSION.NOT_FOUND,
+      status: HttpStatus.FORBIDDEN,
+      title: 'Error',
+      message: `Permission Options `
+    }],
+
+    //PERMISSION ASSIGNMENT
+    [CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_NOT_FOUND, {
+        code: CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_NOT_FOUND,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Related Permission not found.`
+    }],
+    [CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_SET_NOT_FOUND, {
+        code: CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_SET_NOT_FOUND,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Related Permission Set not found.`
+    }],
+    [CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_DOES_NOT_HAVE_OPTIONS, {
+        code: CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_DOES_NOT_HAVE_OPTIONS,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Related Permission does not have options, so you must NOT specify Access.`
+    }],
+    [CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_DOES_NOT_HAVE_SPECIFIED_OPTION, {
+        code: CODES.PERMISSION_ASSIGNMENT.RELATED_PERMISSION_DOES_NOT_HAVE_SPECIFIED_OPTION,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Related Permission does not have option, that you specified in Access.`
+    }],
+
+    //OBJECT METADATA
+    [CODES.OBJECT_METADATA.NOT_FOUND, {
+        code: CODES.OBJECT_METADATA.NOT_FOUND,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Error',
+        message: `Object Metadata not Found.`
+    }],
+    [CODES.OBJECT_METADATA.DUPLICATE_API_NAME, {
+        code: CODES.OBJECT_METADATA.DUPLICATE_API_NAME,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Object Metadata with same ApiName already exist. Choose different name for the Object.`
+    }],
+    [CODES.OBJECT_METADATA.CANNOT_DELETE_STANDARD, {
+        code: CODES.OBJECT_METADATA.CANNOT_DELETE_STANDARD,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `You cannot Delete standard Object.`
+    }],
+    [CODES.OBJECT_METADATA.CANNOT_EDIT_STANDARD, {
+        code: CODES.OBJECT_METADATA.CANNOT_EDIT_STANDARD,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `You cannot Edit standard Object.`
+    }],
+
+    //FIELD METADATA
+    [CODES.FIELD_METADATA.NOT_FOUND, {
+        code: CODES.FIELD_METADATA.NOT_FOUND,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Error',
+        message: `Field Metadata not found.`
+    }],
+    [CODES.FIELD_METADATA.DUPLICATE_API_NAME, {
+        code: CODES.FIELD_METADATA.DUPLICATE_API_NAME,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Field Metadata with same ApiName already exist. Choose different name for the field..`
+    }],
+    [CODES.FIELD_METADATA.CANNOT_DELETE_STANDARD, {
+        code: CODES.FIELD_METADATA.CANNOT_DELETE_STANDARD,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `You cannot Delete standard field.`
+    }],
+    [CODES.FIELD_METADATA.CANNOT_EDIT_STANDARD, {
+        code: CODES.FIELD_METADATA.CANNOT_EDIT_STANDARD,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `You cannot Edit standard field.`
+    }],
+    [CODES.FIELD_METADATA.RELATED_OBJECT_DOES_NOT_EXIST, {
+        code: CODES.FIELD_METADATA.RELATED_OBJECT_DOES_NOT_EXIST,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Related Object does not exist.`
+    }],
+    [CODES.FIELD_METADATA.RELATED_KEY_FIELD_DOES_NOT_EXIST, {
+        code: CODES.FIELD_METADATA.RELATED_KEY_FIELD_DOES_NOT_EXIST,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Related Key Field does not exist.`
+    }],
   ]
-)
+);
