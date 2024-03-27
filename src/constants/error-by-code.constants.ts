@@ -356,6 +356,12 @@ export const ERROR_BY_CODE = new Map([
         title: 'Validation',
         message: `You cannot Edit standard Object.`
     }],
+    [CODES.OBJECT_METADATA.USED_AS_RELATION, {
+        code: CODES.OBJECT_METADATA.USED_AS_RELATION,
+        status: HttpStatus.BAD_REQUEST,
+        title: 'Validation',
+        message: `Object is used as relation.`
+    }],
 
     //FIELD METADATA
     [CODES.FIELD_METADATA.NOT_FOUND, {
